@@ -109,6 +109,21 @@ if [[ "${ENABLE_SUSFS}" == "true" ]]; then
   scripts/config --file "${OUT_DIR}/.config" -e KSU_SUSFS
 fi
 
+# ====================================================================
+# [PENTEST INJECTION] Habilitar HID Gadget (BadUSB) e Drivers Wi-Fi USB
+# ====================================================================
+echo "Applying Pentest configuration (HID Gadget & USB WLAN Support)..."
+scripts/config --file "${OUT_DIR}/.config" \
+  -e USB_GADGET \
+  -e USB_CONFIGFS \
+  -e USB_CONFIGFS_F_HID \
+  -e NETDEVICES \
+  -e WLAN \
+  -e CFG80211 \
+  -e MAC80211 \
+  -e MAC80211_LEDS || true
+# ====================================================================
+
 # Apply selectable Clang LTO for all presets (including gki_fragments / Melt).
 # Default thin is free-runner safe with swap + thinlto job caps; full needs more RAM.
 LTO="${LTO:-thin}"
