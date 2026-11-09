@@ -110,9 +110,9 @@ if [[ "${ENABLE_SUSFS}" == "true" ]]; then
 fi
 
 # ====================================================================
-# [PENTEST INJECTION] Habilitar HID Gadget (BadUSB) e Drivers Wi-Fi USB
+# [PENTEST INJECTION] Habilitar HID Gadget (BadUSB) e Todos os Drivers Wi-Fi
 # ====================================================================
-echo "Applying Pentest configuration (HID Gadget & USB WLAN Support)..."
+echo "Applying Universal Pentest configuration (HID + Atheros + Realtek + MediaTek)..."
 scripts/config --file "${OUT_DIR}/.config" \
   -e USB_GADGET \
   -e USB_CONFIGFS \
@@ -121,7 +121,21 @@ scripts/config --file "${OUT_DIR}/.config" \
   -e WLAN \
   -e CFG80211 \
   -e MAC80211 \
-  -e MAC80211_LEDS || true
+  -e MAC80211_LEDS \
+  -e ATH_COMMON \
+  -e ATH_CARDS \
+  -e ATH9K_HTC \
+  -e ATH9K_HTC_DEBUGFS \
+  -e RTL_CARDS \
+  -e RTL8187 \
+  -e RTL8192CU \
+  -e RT2X00 \
+  -e RT73USB \
+  -e RT2800USB \
+  -e RT2800USB_RT35XX \
+  -e RT2800USB_RT53XX \
+  -e RT2800USB_RT55XX \
+  -e RT2800USB_UNKNOWN || true
 # ====================================================================
 
 # Apply selectable Clang LTO for all presets (including gki_fragments / Melt).
